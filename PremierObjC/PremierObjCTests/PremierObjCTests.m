@@ -1,11 +1,3 @@
-//
-//  PremierObjCTests.m
-//  PremierObjCTests
-//
-//  Created by Stefan Dougan-Hyde on 12/09/2016.
-//  Copyright © 2016 Deliveroo. All rights reserved.
-//
-
 #import <XCTest/XCTest.h>
 
 @interface PremierObjCTests : XCTestCase
