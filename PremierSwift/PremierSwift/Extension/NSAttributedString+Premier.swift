@@ -9,6 +9,5 @@ extension NSAttributedString {
     var bodyAttributes: [String: Any] {
         return [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body), NSForegroundColorAttributeName: UIColor.gray]
     }
-    
 }
 
