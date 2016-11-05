@@ -15,7 +15,7 @@ class MoviesCell: UITableViewCell {
 
     func setup(movie: Movie) {
         
-        self.posterImageView.image = UIImage(named: "Placeholder")
+        posterImageView.image = UIImage(named: "Placeholder")
         
         if let posterPath = movie.posterPath {
             let baseURL = "https://image.tmdb.org/t/p/w300_and_h450_bestv2/"
@@ -28,11 +28,11 @@ class MoviesCell: UITableViewCell {
                         return
                     }
                     
-                        if let data = data, let image = UIImage(data: data) {
-                            DispatchQueue.main.async(execute: { () -> Void in
-                                self.posterImageView.image = image
-                            })
-                        }
+                    if let data = data, let image = UIImage(data: data) {
+                        DispatchQueue.main.async(execute: { () -> Void in
+                            self.posterImageView.image = image
+                        })
+                    }
                 }).resume()
             }
         }

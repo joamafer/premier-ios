@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4D7477531DCC0DDE0082C91D /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7477521DCC0DDE0082C91D /* APIService.swift */; };
+		4D7477551DCE860A0082C91D /* Movies.json in Resources */ = {isa = PBXBuildFile; fileRef = 4D7477541DCE860A0082C91D /* Movies.json */; };
 		4DD9674E1DC95E330060AC41 /* String+Premier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD9674D1DC95E330060AC41 /* String+Premier.swift */; };
 		4DFD62131DC9417D00338111 /* MoviesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFD62111DC9417D00338111 /* MoviesCell.swift */; };
 		4DFD62141DC9417D00338111 /* MoviesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DFD62121DC9417D00338111 /* MoviesCell.xib */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		4D7477521DCC0DDE0082C91D /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIService.swift; path = Service/APIService.swift; sourceTree = "<group>"; };
+		4D7477541DCE860A0082C91D /* Movies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Movies.json; sourceTree = "<group>"; };
 		4DD9674D1DC95E330060AC41 /* String+Premier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Premier.swift"; path = "Extension/String+Premier.swift"; sourceTree = "<group>"; };
 		4DFD62111DC9417D00338111 /* MoviesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoviesCell.swift; path = View/MoviesCell.swift; sourceTree = "<group>"; };
 		4DFD62121DC9417D00338111 /* MoviesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MoviesCell.xib; path = View/MoviesCell.xib; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			children = (
 				F840A5F41D945CF9009325F7 /* PremierSwiftTests.swift */,
 				F840A5F61D945CF9009325F7 /* Info.plist */,
+				4D7477541DCE860A0082C91D /* Movies.json */,
 			);
 			path = PremierSwiftTests;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D7477551DCE860A0082C91D /* Movies.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

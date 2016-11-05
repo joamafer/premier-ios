@@ -21,14 +21,19 @@ class MoviesViewController: UITableViewController {
     }
     
     func setupActivityIndicator() {
-        self.activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        self.view.addSubview(self.activityIndicatorView)
-        self.activityIndicatorView?.center = self.view.center
+        activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(self.activityIndicatorView)
+        activityIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
     func setupTableView() {
         tableView.register(UINib(nibName: String(describing: MoviesCell.self), bundle: nil) , forCellReuseIdentifier: String(describing: MoviesCell.self))
         tableView.tableFooterView = UIView()
+        refreshControl = UIRefreshControl()
+        refreshControl!.addTarget(self, action: #selector(MoviesViewController.fetch), for: .valueChanged)
+        tableView.addSubview(refreshControl!)
     }
     
     // MARK: - Fetch
@@ -37,23 +42,24 @@ class MoviesViewController: UITableViewController {
         
         APIService.fetch(beforeLoad: {
             
-                self.activityIndicatorView?.startAnimating()
+            self.activityIndicatorView?.startAnimating()
             
-            }, afterLoad: {
+        }, afterLoad: {
+                
+            DispatchQueue.main.async(execute: { () -> Void in
+                self.activityIndicatorView?.stopAnimating()
+                self.refreshControl?.endRefreshing()
+            })
+
+        }, success: { [weak self] response in
+                
+                self?.movies = Movie().mapArray(mappingArray: response)
                 
                 DispatchQueue.main.async(execute: { () -> Void in
-                    self.activityIndicatorView?.stopAnimating()
+                    self?.tableView.reloadData()
                 })
                 
-            }, success: { response in
-                
-                self.movies = Movie().mapArray(mappingArray: response)
-                
-                DispatchQueue.main.async(execute: { () -> Void in
-                    self.tableView.reloadData()
-                })
-                
-        }) { error in
+        }) { [weak self] error in
             
             let alertController = UIAlertController(title: NSLocalizedString("Error", comment: "Error"),
                                                     message: error?.localizedDescription,
@@ -62,17 +68,18 @@ class MoviesViewController: UITableViewController {
                                                     style: .default, handler: nil))
             alertController.addAction(UIAlertAction(title: NSLocalizedString("Retry", comment: "Retry"),
                                                     style: .default, handler: { action in
-                                                        self.fetch()
+                                                        self?.fetch()
             }))
             
             DispatchQueue.main.async {
-                self.present(alertController, animated: true, completion: nil)
+                self?.present(alertController, animated: true, completion: nil)
             }
         }
     }
 }
 
 extension MoviesViewController {
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let movies = self.movies {
             return movies.count

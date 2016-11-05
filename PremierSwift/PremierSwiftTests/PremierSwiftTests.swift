@@ -13,9 +13,31 @@ class PremierSwiftTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testMapJSON() {
+        
+        if let jsonPath = Bundle(for: PremierSwiftTests.self).path(forResource: "Movies", ofType: "json") {
+            do {
+                let contents = try String(contentsOfFile: jsonPath)
+                
+                if let data = contents.data(using: .utf8) {
+                    let JSON = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: Any]
+                    
+                    if let moviesArray = JSON["results"] as? [AnyObject] {
+                        let movie = Movie()
+                        let parsedMoviesArray = movie.mapArray(mappingArray: moviesArray)
+                        XCTAssert(parsedMoviesArray.count == moviesArray.count, "Parsed objects count should match array objects count")
+                    } else {
+                        XCTFail("JSON results has an unexpected type")
+                    }
+                } else {
+                    XCTFail("Cannot convert String to Data")
+                }
+            } catch {
+                XCTFail("JSON format is not valid")
+            }
+        } else {
+            XCTFail("Cannot find file")
+        }
     }
     
     func testPerformanceExample() {

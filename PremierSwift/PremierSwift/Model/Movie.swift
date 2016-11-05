@@ -28,7 +28,7 @@ class Movie: NSObject {
         return mapArray
     }
     
-    func map(mappingObject: [String: Any]) {
+    private func map(mappingObject: [String: Any]) {
         if let adult = mappingObject["adult"] as? Bool {
             self.adult = adult
         }
